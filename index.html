@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Learning App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6f0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        .letter {
+            font-size: 5rem;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 2px solid #ff99cc;
+            border-radius: 10px;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s;
+        }
+
+        .letter:hover {
+            background-color: #ffd1e1;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background-color: #ff99cc;
+            border: none;
+            border-radius: 10px;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="letter" id="letter1" onclick="toggleCase('letter1')">A</div>
+        <div class="letter" id="letter2" onclick="toggleCase('letter2')">B</div>
+        <div class="letter" id="letter3" onclick="toggleCase('letter3')">C</div>
+        <div class="letter" id="letter4" onclick="toggleCase('letter4')">D</div>
+    </div>
+    <button onclick="resetLetters()">Reset Letters</button>
+    <script>
+        const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        const audioFiles = {
+            'A': new Audio('A.mp3'),
+            'B': new Audio('B.mp3'),
+            'C': new Audio('C.mp3'),
+            'D': new Audio('D.mp3'),
+            'E': new Audio('E.mp3'),
+            'F': new Audio('F.mp3'),
+            'G': new Audio('G.mp3'),
+            'H': new Audio('H.mp3'),
+            'I': new Audio('I.mp3'),
+            'J': new Audio('J.mp3'),
+            'K': new Audio('K.mp3'),
+            'L': new Audio('L.mp3'),
+            'M': new Audio('M.mp3'),
+            'N': new Audio('N.mp3'),
+            'O': new Audio('O.mp3'),
+            'P': new Audio('P.mp3'),
+            'Q': new Audio('Q.mp3'),
+            'R': new Audio('R.mp3'),
+            'S': new Audio('S.mp3'),
+            'T': new Audio('T.mp3'),
+            'U': new Audio('U.mp3'),
+            'V': new Audio('V.mp3'),
+            'W': new Audio('W.mp3'),
+            'X': new Audio('X.mp3'),
+            'Y': new Audio('Y.mp3'),
+            'Z': new Audio('Z.mp3')
+        };
+
+        let currentAudio = null;
+
+        function toggleCase(id) {
+            const element = document.getElementById(id);
+            const letter = element.textContent;
+            playAudio(letter.toUpperCase());
+            const newLetter = letter === letter.toUpperCase() ? letter.toLowerCase() : letter.toUpperCase();
+            element.textContent = newLetter;
+            playAudio(newLetter.toUpperCase());
+        }
+
+        function playAudio(letter) {
+            if (audioFiles[letter]) {
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+                currentAudio = audioFiles[letter];
+                currentAudio.play();
+            }
+        }
+
+        function resetLetters() {
+            for (let i = 1; i <= 4; i++) {
+                const randomIndex = Math.floor(Math.random() * letters.length);
+                const letter = letters[randomIndex];
+                document.getElementById(`letter${i}`).textContent = letter;
+            }
+        }
+    </script>
+</body>
+</html>
